@@ -14,9 +14,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static RetrofitClient instance = null;
     private Retrofit retrofit;
+    private ApiRequest apiRequest;
 
     private RetrofitClient() {
         retrofit = createRetrofit();
+        apiRequest = retrofit.create(ApiRequest.class);
     }
 
     public static RetrofitClient getInstance() {
@@ -42,5 +44,8 @@ public class RetrofitClient {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .baseUrl("https://khoapham.vn/");
         return retrofit.build();
+    }
+    public ApiRequest getApiRequest(){
+        return apiRequest;
     }
 }
